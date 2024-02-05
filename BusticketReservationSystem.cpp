@@ -220,6 +220,8 @@ void BookTicket()
         cout << ".";
         Sleep(700);
     }
+    system("cls");
+    cout<<"Ticket generated successfully\n";
     cout<<"\n";
     cout << "Bus Number: " << chosenBus << "\n";
     cout << "Seat Number: " << chosenSeat << "\n";
@@ -230,50 +232,41 @@ void BookTicket()
 }
 
 // Cancel a ticket
-void Cancleticket() 
+void Cancleticket()
 {
     system("cls");
-    // Ask enter the bus number
+
+    // Ask user to enter the bus number
     cout << "\nEnter the Bus Number for ticket cancellation: ";
     int chosenBus;
     cin >> chosenBus;
 
-    // Check  bus number is valid
-    if (chosenBus <= 0 || chosenBus > MAX_BUSES || buses[chosenBus - 1].drivername.empty()) 
-    {
-        cout << "Invalid Bus Number. Please try again." << endl;
-    }
-
-    // Ask enter seat for cancel
-    cout << "\nEnter the Seat Number for ticket cancellation: ";
+    // Ask user to enter the seat number
+    cout << "Enter the Seat Number for ticket cancellation: ";
     int chosenSeat;
     cin >> chosenSeat;
 
-    // Check if the chosen seat number is valid
-    if (chosenSeat <= 0 || chosenSeat > MAX_SEATS || buses[chosenBus - 1].bookseat[chosenSeat - 1] == 0) 
+    // Check if both bus and seat numbers are valid
+    if (chosenBus <= 0 || chosenBus > MAX_BUSES || buses[chosenBus - 1].drivername.empty() ||
+        chosenSeat <= 0 || chosenSeat > MAX_SEATS || buses[chosenBus - 1].bookseat[chosenSeat - 1] == 0)
     {
-        cout << "Invalid Seat Number. Please try again." << endl;
+        cout << "\nInvalid Bus Number or Seat Number. Please check the details and try again." << endl;
+        return;
     }
 
-    // update the seat now
+    // Update the seat status
     buses[chosenBus - 1].bookseat[chosenSeat - 1] = 0;
     buses[chosenBus - 1].totalseats++;
 
-    // Display cancell message
-    if (buses[chosenBus - 1].bookseat[chosenSeat - 1] == 0) 
+    // Display cancellation message
+    cout << "\nTicket cancellation! Please wait";
+    for (int i = 0; i < 4; i++)
     {
-        cout << "\nTicket cancellation! Please wait";
-        for(int i = 0; i < 4; i++)
-        {
-            cout << ".";
-            Sleep(700);
-        }
-        cout << "\nTicket canceled successfully!\n";
-    } 
-    else 
-    {
-        cout << "\nIncorrect information. Please check the details and try again.\n";
+        cout << ".";
+        Sleep(700);
     }
+    system("cls");
+    cout << "\nTicket canceled successfully!\n";
 }
 
 // lock the admin database
@@ -298,6 +291,7 @@ void lock()
             cout << ".";
             Sleep(700);
         }
+        system("cls");
         while (true)
         {
             cout << "\n\t\t_______________________________________________\n";
