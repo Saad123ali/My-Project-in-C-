@@ -3,136 +3,132 @@
 #include<iomanip>
 
 using namespace std;
+
 const int MAX_BOOKS = 100;
-const int MAX_STUDENTS =50;
+const int MAX_STUDENTS = 50;
 
 // Book structure
-struct Book
+struct Book 
 {
     int id;
     string name;
     string author;
-    bool isIssued;
 };
 
 // Student structure
-struct Student
+struct Student 
 {
     int id;
     string name;
     int issuedBookCount;
-    Book issuedBooks[MAX_BOOKS];
+    int issuedBooks[MAX_BOOKS];
 };
+
 Book books[MAX_BOOKS];
 int bookCount = 0;
 Student students[MAX_STUDENTS];
 int studentCount = 0;
 
-// generate Book id
-int generatedBookId()
+// Generate Book ID
+int generatedBookId() 
 {
     static int nextID = 1;
     return nextID++;
 }
 
-// generate student id
-int generatedStudentId()
+// Generate student ID
+int generatedStudentId() 
 {
     static int nextID = 1;
     return nextID++;
 }
 
-// add book
-void addBook()
+// Add book
+void addBook() 
 {
     system("cls");
-    if ( bookCount == MAX_BOOKS )
+    if (bookCount == MAX_BOOKS) 
     {
-        cout<<"Book Storage Full."<<endl;
+        cout << "Book Storage Full." << endl;
         return;
     }
 
     Book book;
-    book.id =generatedBookId();
-    cout<<"Enter book name: ";
+    book.id = generatedBookId();
+    cout << "Enter book name: ";
     cin.ignore();
     getline(cin, book.name);
-    cout<<"Enter author name: ";
+    cout << "Enter author name: ";
     getline(cin, book.author);
-    book.isIssued = false;
-    books[bookCount++]=book;
-    cout<<"Book added successfully!"<<endl;
+    books[bookCount++] = book;
+    cout << "Book added successfully!" << endl;
 }
 
-// add student
-void addStudent()
+// Add student
+void addStudent() 
 {
     system("cls");
-    if ( studentCount == MAX_STUDENTS )
+    if (studentCount == MAX_STUDENTS) 
     {
-        cout<<"Student Storage Full."<<endl;
+        cout << "Student Storage Full." << endl;
         return;
     }
 
     Student student;
     student.id = generatedStudentId();
-    cout<<"Enter student name: ";
+    cout << "Enter student name: ";
     cin.ignore();
     getline(cin, student.name);
     student.issuedBookCount = 0;
     students[studentCount++] = student;
-    cout<<"Student added successfully!"<<endl;
+    cout << "Student added successfully!" << endl;
 }
 
-// dispaly all books
+// Display all books
 void displayAllBooks() 
 {
     system("cls");
-    if (bookCount == 0)
+    if (bookCount == 0) 
     {
-        cout<<"No books in the library!"<<endl;
+        cout << "No books in the library!" << endl;
         return;
     }
 
-    cout<<"Book in the library:"<<endl;
-    for( int i= 0; i < bookCount; i++ )
+    cout << "Books in the library:" << endl;
+    for (int i = 0; i < bookCount; i++) 
     {
-        cout<<"Book id: "<<books[i].id <<endl;
-        cout<<"Book name: "<<books[i].name<<endl;
-        cout<<"Book author: "<<books[i].author<<endl;
-        if (books[i].isIssued)
-        {
-            cout<<"Issued"<<endl;
-        }
-        cout<<endl;
+        cout << "Book id: " << books[i].id << endl;
+        cout << "Book name: " << books[i].name << endl;
+        cout << "Book author: " << books[i].author << endl;
+        cout << endl;
     }
 }
 
-// display all students
-void displayAllStudents()
+// Display all students
+void displayAllStudents() 
 {
     system("cls");
-    if ( studentCount == 0 )
+    if (studentCount == 0) 
     {
-        cout<<"No students in the system!"<<endl;
+        cout << "No students in the system!" << endl;
         return;
     }
 
-    cout<<"Students in the system:"<<endl;
-    for( int i=0; i<studentCount; i++ )
+    cout << "Students in the system:" << endl;
+    for (int i = 0; i < studentCount; i++) 
     {
-        cout<<"Student id: "<< students[i].id<<endl;
-        cout<<"Name: "<< students[i].name<<endl;
-        cout<<"Issued books: "<< students[i].issuedBookCount<<endl;
-        cout<<endl;
+        cout << "Student id: " << students[i].id << endl;
+        cout << "Name: " << students[i].name << endl;
+        cout << "Issued books: " << students[i].issuedBookCount << endl;
+        cout << endl;
     }
 }
 
-// search book by name
-void searchBookByName()
+// Search book by name
+void searchBookByName() 
 {
     system("cls");
-    if (bookCount == 0)
+    if (bookCount == 0) 
     {
         cout << "No books in the library." << endl;
         return;
@@ -143,40 +139,34 @@ void searchBookByName()
     cin.ignore();
     getline(cin, searchName);
 
-    bool bookFound = false; 
+    bool bookFound = false;
 
-    // search book by name loop
-    for (int i = 0; i < bookCount; i++)
+    for (int i = 0; i < bookCount; i++) 
     {
-        if (books[i].name == searchName)
+        if (books[i].name == searchName) 
         {
             cout << "\tBook found!" << endl;
             cout << "\tBook id: " << books[i].id << endl;
             cout << "\tBook name: " << books[i].name << endl;
             cout << "\tAuthor: " << books[i].author << endl;
-            if (books[i].isIssued)
-            {
-                cout << "\tIssued";
-            }
             cout << endl;
 
             bookFound = true;
-            break; 
+            break;
         }
     }
 
-    if (!bookFound)
+    if (!bookFound) 
     {
         cout << "Book not found for the name: " << searchName << endl;
     }
 }
 
-
-// display book by author
-void displayBooksByAuthor()
+// Display books by author
+void displayBooksByAuthor() 
 {
     system("cls");
-    if (bookCount == 0)
+    if (bookCount == 0) 
     {
         cout << "No books in the library!" << endl;
         return;
@@ -187,135 +177,61 @@ void displayBooksByAuthor()
     cin.ignore();
     getline(cin, searchAuthor);
 
-    bool booksFound = false; 
+    bool booksFound = false;
 
     cout << "Books by " << searchAuthor << " :" << endl;
 
-    // search book by name of author  loop
-    for (int i = 0; i < bookCount; i++)
+    for (int i = 0; i < bookCount; i++) 
     {
-        if (books[i].author == searchAuthor)
+        if (books[i].author == searchAuthor) 
         {
             cout << "Book id: " << books[i].id << endl;
             cout << "Name: " << books[i].name << endl;
             cout << "Author: " << books[i].author << endl;
-            if (books[i].isIssued)
-            {
-                cout << "Issued";
-            }
             cout << endl;
 
-            booksFound = true; 
+            booksFound = true;
         }
     }
 
-    if (!booksFound)
+    if (!booksFound) 
     {
         cout << "No books found for the author: " << searchAuthor << endl;
     }
 }
 
-
-// search student by name
+// Search student by name
 void searchStudentByName() 
 {
     system("cls");
     if (studentCount == 0) 
     {
-        cout<<"No students in the system."<<endl;
+        cout << "No students in the system." << endl;
         return;
     }
 
     string searchName;
-    cout<<"Enter the name of the student to search: ";
-    cin.ignore(); 
+    cout << "Enter the name of the student to search: ";
+    cin.ignore();
     getline(cin, searchName);
-    // search student loop
+
     for (int i = 0; i < studentCount; ++i) 
     {
         if (students[i].name == searchName) 
         {
-            cout<<"Student found!"<<endl;
-            cout<<"Student ID: "<<students[i].id<<endl;
-            cout<<"Name: " <<students[i].name<<endl;
-            cout<<"Issued Books: " << students[i].issuedBookCount<<endl;
+            cout << "Student found!" << endl;
+            cout << "Student ID: " << students[i].id << endl;
+            cout << "Name: " << students[i].name << endl;
+            cout << "Issued Books: " << students[i].issuedBookCount << endl;
             return;
         }
     }
+
     cout << "Student not found." << endl;
 }
 
-// issue book
-void issueBook()
-{
-    system("cls");
-    if ( bookCount == 0 || studentCount == 0 )
-    {
-        cout<<"No books or students in the system."<<endl;
-        return;
-    }
-
-    int studentid , bookid;
-    cout<<"Enter the student id: ";
-    cin>>studentid;
-    // find the studdent
-    int studentIndex = -1;
-    for( int i=0; i<studentCount; i++ )
-    {
-        if (students[i].id == studentid)
-        {
-            studentIndex = i;
-            break;
-        }
-    }
-    // else student not found
-    if ( studentIndex == -1 )
-    {
-        cout<<"Student not found!"<<endl;
-        return;
-    }
-
-    cout<<"Enter book id to issue: ";
-    cin>>bookid;
-    // find the book
-    int bookIndex = -1;
-    for( int i = 0; i<bookCount; i++ )
-    {
-        if(bookid == books[i].id)
-        {
-            bookIndex = i;
-            break;
-        }
-    }
-    // else  book not found
-    if ( bookIndex == -1 )
-    {
-        cout<<"Book not found!"<<endl;
-        return;
-    }
-
-    // check if book already issued
-    if(books[bookIndex].isIssued)
-    {
-        cout<<"Book already issued!"<<endl;
-        return;
-    }
-
-    // chek if student has reached maximum allowed issued book
-    if(students[studentIndex].issuedBookCount == MAX_BOOKS)
-    {
-        cout<<"Student has reached maximum allowed issued book!"<<endl;
-        return;
-    }
-
-    // issue book to the student
-    books[bookIndex].isIssued = true;
-    students[studentIndex].issuedBooks[students[studentIndex].issuedBookCount++] = books[bookIndex];
-    cout<<"Book issued successfully!"<<endl;
-}
-
-// return book 
-void returnBook()
+// Issue book
+void issueBook() 
 {
     system("cls");
     if (bookCount == 0 || studentCount == 0) 
@@ -324,72 +240,132 @@ void returnBook()
         return;
     }
 
-    int studentid , bookid;
-    cout<<"Enter student id: ";
-    cin>>studentid;
-    // find the student
+    int studentId, bookId;
+    cout << "Enter the student id: ";
+    cin >> studentId;
+
     int studentIndex = -1;
-    for(int i=0; i<studentCount; i++)
+    for (int i = 0; i < studentCount; i++) 
     {
-        if( students[i].id == studentid )
+        if (students[i].id == studentId) 
         {
             studentIndex = i;
             break;
         }
     }
-    // else student not found
-    if ( studentIndex == -1 )
+
+    if (studentIndex == -1) 
     {
-        cout<<"Student not found!"<<endl;
+        cout << "Student not found!" << endl;
         return;
     }
 
-    cout<<"Enter book id to return: ";
-    cin>>bookid;
-    // find the book 
+    cout << "Enter book id to issue: ";
+    cin >> bookId;
+
     int bookIndex = -1;
-    for(int i=0; i<bookCount; i++)
+    for (int i = 0; i < bookCount; i++) 
     {
-        if( bookid == books[i].id )
+        if (books[i].id == bookId) 
         {
             bookIndex = i;
             break;
         }
     }
-    // else book not found
-    if ( bookIndex == -1 )
+
+    if (bookIndex == -1) 
     {
-        cout<<"Book not found!"<<endl;
+        cout << "Book not found!" << endl;
         return;
     }
 
-    // check if the book actually issued to the student
-    bool bookIssuedToStudent = false;
-    for( int i=0; i<students[studentIndex].issuedBookCount; i++ )
+    if (students[studentIndex].issuedBookCount == MAX_BOOKS) 
     {
-        if ( students[studentIndex].issuedBooks[i].id == bookid )
+        cout << "Student has reached maximum allowed issued book!" << endl;
+        return;
+    }
+
+    students[studentIndex].issuedBooks[students[studentIndex].issuedBookCount++] = books[bookIndex].id;
+    cout << "Book issued successfully!" << endl;
+}
+
+// Return book
+void returnBook() 
+{
+    system("cls");
+    if (bookCount == 0 || studentCount == 0) 
+    {
+        cout << "No books or students in the system." << endl;
+        return;
+    }
+
+    int studentId, bookId;
+    cout << "Enter student id: ";
+    cin >> studentId;
+
+    int studentIndex = -1;
+    for (int i = 0; i < studentCount; i++) 
+    {
+        if (students[i].id == studentId) 
+        {
+            studentIndex = i;
+            break;
+        }
+    }
+
+    if (studentIndex == -1) 
+    {
+        cout << "Student not found!" << endl;
+        return;
+    }
+
+    cout << "Enter book id to return: ";
+    cin >> bookId;
+
+    int bookIndex = -1;
+    for (int i = 0; i < bookCount; i++) 
+    {
+        if (books[i].id == bookId) 
+        {
+            bookIndex = i;
+            break;
+        }
+    }
+
+    if (bookIndex == -1) 
+    {
+        cout << "Book not found!" << endl;
+        return;
+    }
+
+    bool bookIssuedToStudent = false;
+    for (int i = 0; i < students[studentIndex].issuedBookCount; i++) 
+    {
+        if (students[studentIndex].issuedBooks[i] == bookId) 
         {
             bookIssuedToStudent = true;
             break;
         }
     }
-    // if book is not issued to student
-    if (!bookIssuedToStudent)
+
+    if (!bookIssuedToStudent) 
     {
-        cout<<"The book is not issued to student!"<<endl;
+        cout << "The book is not issued to the student!" << endl;
         return;
     }
 
-    // return the book
-    books[bookIndex].isIssued = false;
     students[studentIndex].issuedBookCount--;
-    cout<<"Book returned successfully!"<<endl;
+    cout << "Book returned successfully!" << endl;
 }
 
-// delete student from record
-void deleteStudent(int studentID) 
+// Delete student from record
+void deleteStudent() 
 {
     system("cls");
+    int studentID;
+    cout << "Enter Student ID to delete: ";
+    cin >> studentID;
+
     int studentIndex = -1;
     for (int i = 0; i < studentCount; ++i) 
     {
@@ -402,20 +378,25 @@ void deleteStudent(int studentID)
 
     if (studentIndex == -1) 
     {
-        cout << "Student not found." << endl;
+        cout << "Student not found." <<endl;
         return;
     }
 
-    // replace arrray position with delete position
+    // Use pointers to swap the found student with the last student
+    Student* temp = &students[studentIndex];
     students[studentIndex] = students[--studentCount];
+    students[studentCount] = *temp;
 
-    cout << "Student deleted successfully!" << endl;
+    cout << "Student deleted successfully!" <<endl;
 }
-
-// delete book from record
-void deleteBook(int bookID) 
+// Delete book from record
+void deleteBook() 
 {
     system("cls");
+    int bookID;
+    cout << "Enter book id to delete: ";
+    cin >> bookID;
+
     int bookIndex = -1;
     for (int i = 0; i < bookCount; ++i) 
     {
@@ -428,17 +409,20 @@ void deleteBook(int bookID)
 
     if (bookIndex == -1) 
     {
-        cout << "Book not found." << endl;
+        cout << "Book not found." <<endl;
         return;
     }
 
-    // replace arrray position with delete position
+    // Use pointers to swap the found book with the last book
+    Book* temp = &books[bookIndex];
     books[bookIndex] = books[--bookCount];
+    books[bookCount] = *temp;
 
-    cout << "Book deleted successfully!" << endl;
+    cout << "Book deleted successfully!" <<endl;
 }
 
-// delete all books record
+
+// Delete all books record
 void deleteAllBooks() 
 {
     system("cls");
@@ -446,7 +430,7 @@ void deleteAllBooks()
     cout << "All books deleted successfully!" << endl;
 }
 
-// delete all students record
+// Delete all students record
 void deleteAllStudents() 
 {
     system("cls");
@@ -454,11 +438,10 @@ void deleteAllStudents()
     cout << "All students deleted successfully!" << endl;
 }
 
-int main()
+int main() 
 {
     string choice;
-    do
-    {
+    do {
         cout << "\n\t\t ______________________________________________\n";
         cout << "\t\t|       |" << setw(40) << "|\n";
         cout << "\t\t| [1]   |     Add Book" << setw(27) << "|\n";
@@ -478,43 +461,43 @@ int main()
         cout << "\n\t\tEnter your choice ... ";
         cin >> choice;
 
-        if (choice == "1")
+        if (choice == "1") 
         {
             addBook();
         }
-        else if (choice == "2")
+        else if (choice == "2") 
         {
             addStudent();
         }
-        else if (choice == "3")
+        else if (choice == "3") 
         {
             issueBook();
         }
-        else if (choice == "4")
+        else if (choice == "4") 
         {
             returnBook();
         }
-        else if (choice == "5")
+        else if (choice == "5") 
         {
             searchBookByName();
         }
-        else if (choice == "6")
+        else if (choice == "6") 
         {
             searchStudentByName();
         }
-        else if (choice == "7")
+        else if (choice == "7") 
         {
             displayAllBooks();
         }
-        else if (choice == "8")
+        else if (choice == "8") 
         {
             displayAllStudents();
         }
-        else if (choice == "9")
+        else if (choice == "9") 
         {
             displayBooksByAuthor();
         }
-        else if (choice == "10")
+        else if (choice == "10") 
         {
             system("cls");
             string dell;
@@ -526,55 +509,48 @@ int main()
             cout << "\t\t|_______|______________________________________|\n";
             cout << "\n\t\tEnter your choice ... ";
             cin >> dell;
-            if (dell == "1")
+            if (dell == "1") 
             {
-                int deleteBookid;
-                cout << "Enter book id to delete: ";
-                cin >> deleteBookid;
-                deleteBook(deleteBookid);
+                deleteBook();
             }
-            else if (dell == "2")
+            else if (dell == "2") 
             {
                 deleteAllBooks();
             }
-            else
+            else 
             {
                 cout << "Invalid choice!" << endl;
             }
         }
-        else if (choice == "11")
+        else if (choice == "11") 
         {
             system("cls");
             string dells;
             cout << "\n\t\t ______________________________________________\n";
             cout << "\t\t|       |" << setw(40) << "|\n";
-            cout << "\t\t| [1]   |     Specific Book record" << setw(15) << "|\n";
-            cout << "\t\t| [2]   |     Delete All Book record" << setw(13) << "|\n";
+            cout << "\t\t| [1]   |     Specific Student record" << setw(12) << "|\n";
+            cout << "\t\t| [2]   |     Delete All Student record" << setw(10) << "|\n";
             cout << "\t\t|       |" << setw(40) << "|\n";
             cout << "\t\t|_______|______________________________________|\n";
             cout << "\n\t\tEnter your choice ... ";
             cin >> dells;
-            if (dells == "1")
+            if (dells == "1") 
             {
-                int deleteStudentID;
-                cout << "Enter Student ID to delete: ";
-                cin >> deleteStudentID;
-                deleteStudent(deleteStudentID);
+                deleteStudent();
             }
-            else if (dells == "2")
+            else if (dells == "2") 
             {
                 deleteAllStudents();
             }
-            else
-            {
+            else {
                 cout << "Invalid choice!" << endl;
             }
         }
-        else if (choice == "0")
+        else if (choice == "0") 
         {
-            cout << "Thanks for using this code" << endl;
+            cout << "\n\n\t\tThanks for using this code\n\n" << endl;
         }
-        else
+        else 
         {
             cout << "Invalid choice!" << endl;
         }
