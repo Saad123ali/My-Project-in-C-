@@ -552,6 +552,7 @@ int main()
         }
         else 
         {
+            system("cls");
             cout << "Invalid choice!" << endl;
         }
 
