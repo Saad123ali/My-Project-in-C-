@@ -51,12 +51,19 @@ void borrowbook()
         bool found = false;
         string Title;
         string ISBN;
-        cout << "Enter the title of the book to borrow: ";
-        cin.ignore();
-        getline(cin, Title);
+        
+        do {
+            cout << "Enter the title of the book to borrow: ";
+            cin.ignore();
+            getline(cin, Title);
 
-        cout << "Enter the ISBN of the book: ";
-        getline(cin, ISBN);
+            cout << "Enter the ISBN of the book: ";
+            getline(cin, ISBN);
+
+            if (Title.empty() || ISBN.empty()) {
+                cout << "\nInvalid input! Please enter both the title and ISBN.\n";
+            }
+        } while (Title.empty() || ISBN.empty());
 
         for(int i=0; i<numbooks; i++)
         {
@@ -91,12 +98,19 @@ void returnbook()
     bool search = false;
     string Title;
     string ISBN;
-    cout << "Enter the title of the book to return: ";
-    cin.ignore();
-    getline(cin, Title);
 
-    cout << "Enter the ISBN of the book: ";
-    getline(cin, ISBN);
+    do {
+        cout << "Enter the title of the book to return: ";
+        cin.ignore();
+        getline(cin, Title);
+
+        cout << "Enter the ISBN of the book: ";
+        getline(cin, ISBN);
+
+        if (Title.empty() || ISBN.empty()) {
+            cout << "\nInvalid input! Please enter both the title and ISBN.\n";
+        }
+    } while (Title.empty() || ISBN.empty());
     
     for(int i = 0; i < numbooks; i++)
     {
@@ -123,7 +137,7 @@ void returnbook()
     }
 }
 
-// dispaly all available books function
+
 // Display all available books function
 void availablebook()  
 {
