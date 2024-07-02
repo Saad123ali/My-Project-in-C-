@@ -1,0 +1,12 @@
+{
+    "C_Cpp.default.compilerPath": "f:\\Saad Ali 56673\\hello",
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "xstring": "cpp",
+        "format": "cpp",
+        "iomanip": "cpp",
+        "string": "cpp"
+    }
+}
